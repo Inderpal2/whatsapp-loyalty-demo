@@ -1,56 +1,25 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background: #f7f9fb;
-  margin: 0;
-  padding: 20px;
-  color: #333;
+function scanQR() {
+  const screen = document.getElementById('screenContent');
+  screen.innerHTML = `
+    <h2>📲 WhatsApp Chat</h2>
+    <p><strong>Business:</strong> Welcome to Café Loyalty! 🚀<br>Send us your receipt to earn points.</p>
+  `;
+  document.getElementById('receiptBtn').disabled = false;
 }
 
-.container {
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
+function sendReceipt() {
+  const screen = document.getElementById('screenContent');
+  screen.innerHTML += `
+    <p><strong>You:</strong> (Uploads Receipt 📸)</p>
+    <p><strong>Business:</strong> ✅ Thanks! You've earned 50 points!</p>
+  `;
+  document.getElementById('rewardsBtn').disabled = false;
 }
 
-h1 {
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-.step {
-  display: none;
-  margin-bottom: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.step.active {
-  display: block;
-  animation: fadeIn 0.5s;
-}
-
-.controls {
-  margin-top: 30px;
-}
-
-button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  font-size: 16px;
-  background-color: #00a884;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #00795e;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+function viewRewards() {
+  const screen = document.getElementById('screenContent');
+  screen.innerHTML += `
+    <p><strong>You:</strong> My Rewards 🎁</p>
+    <p><strong>Business:</strong><br>⭐ Free Coffee - 100 Points<br>⭐ 10% Off Next Visit - 150 Points</p>
+  `;
 }
