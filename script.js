@@ -1,70 +1,78 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background: #f0f4f8;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-  color: #333;
-}
+let currentStep = 0;
 
-.container {
-  max-width: 600px;
-  margin: auto;
-}
+const steps = [
+  // CUSTOMER JOURNEY
+  {
+    descTitle: "🛒 Step 1: Visit the Store",
+    descText: "Customer visits a café, salon, gym, or shop offering the loyalty program.",
+    screenContent: "🏪 Welcome! Visit a participating store to begin."
+  },
+  {
+    descTitle: "📸 Step 2: See a Sign at the Counter",
+    descText: 'Customer sees a poster: "Earn Rewards! Scan to Join!" QR code at checkout.',
+    screenContent: "📸 See QR Code at Counter: 'Scan to Join Rewards!'"
+  },
+  {
+    descTitle: "📲 Step 3: Scan the QR Code",
+    descText: "Customer scans the QR code, WhatsApp chat with business opens automatically.",
+    screenContent: "📲 Opening WhatsApp chat... Connecting to Store..."
+  },
+  {
+    descTitle: "💬 Step 4: Join via WhatsApp",
+    descText: "Bot: 'Welcome to [Store Name] Rewards! 🚀 Send us a receipt photo to earn points.'",
+    screenContent: "💬 WhatsApp Message:<br><br>'Welcome to Café Rewards! 🚀 Send us your receipt to earn points.'"
+  },
+  {
+    descTitle: "📤 Step 5: Upload Receipt",
+    descText: "Customer uploads photo of receipt (or enters receipt code).",
+    screenContent: "📤 You uploaded your receipt 📸<br>System is checking..."
+  },
+  {
+    descTitle: "✅ Step 6: Earn Points",
+    descText: "Customer gets confirmation: '✅ You've earned 50 points!'",
+    screenContent: "✅ Thanks! You earned 50 points!"
+  },
+  {
+    descTitle: "🎯 Step 7: Redeem Rewards",
+    descText: "Customer types 'My Rewards' in WhatsApp, views balance and available offers.",
+    screenContent: "🎯 Your Rewards:<br>- Free Coffee (100 points)<br>- 10% Off Haircut (150 points)"
+  },
 
-h1 {
-  margin-bottom: 20px;
-}
+  // STORE OWNER JOURNEY
+  {
+    descTitle: "🛠️ Store Owner: Step 1: Set Up",
+    descText: "Owner signs up, gets unique QR code, access to dashboard, prints QR for store.",
+    screenContent: "🛠️ Owner Panel:<br>- Download QR<br>- Print Poster<br>- Set Promotions"
+  },
+  {
+    descTitle: "📲 Store Owner: Step 2: Daily Ops",
+    descText: "Customers scan QR and send receipts. Owner approves points via WhatsApp or dashboard.",
+    screenContent: "📲 Today's Activity:<br>- 23 new receipts<br>- 3 new members joined"
+  },
+  {
+    descTitle: "🎯 Store Owner: Step 3: Promotions",
+    descText: "Owner sends offers like 'Double Points Friday' via WhatsApp to loyal customers.",
+    screenContent: "🎯 Promotion Set:<br>- Double Points Friday!<br>- AED 50 Spend = Free Drink ☕"
+  },
 
-.description {
-  background: #fff;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+  // THE END
+  {
+    descTitle: "🔥 End of Journey",
+    descText: "That's the full journey! Customer and Owner both benefit from a simple, rewarding system.",
+    screenContent: "🎉 Thanks for exploring the Loyalty Journey!"
+  }
+];
 
-.phone-frame {
-  width: 300px;
-  height: 550px;
-  border: 14px solid #333;
-  border-radius: 36px;
-  margin: 20px auto;
-  background: #e5ddd5;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
+function nextStep() {
+  if (currentStep < steps.length) {
+    const journey = document.getElementById('journeyDescription');
+    const phone = document.getElementById('screenContent');
 
-.phone-screen {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-.screen-content {
-  text-align: left;
-  font-size: 16px;
-}
-
-.controls {
-  margin-top: 20px;
-}
-
-button {
-  background-color: #00a884;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  margin: 5px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #007c65;
+    journey.innerHTML = `
+      <h2>${steps[currentStep].descTitle}</h2>
+      <p>${steps[currentStep].descText}</p>
+    `;
+    phone.innerHTML = steps[currentStep].screenContent.replace(/\n/g, '<br>');
+    currentStep++;
+  }
 }
