@@ -1,78 +1,116 @@
 let currentStep = 0;
+let typing = false;
 
 const steps = [
   // CUSTOMER JOURNEY
   {
     descTitle: "🛒 Step 1: Visit the Store",
     descText: "Customer visits a café, salon, gym, or shop offering the loyalty program.",
-    screenContent: "🏪 Welcome! Visit a participating store to begin."
+    screenMessages: ["🏪 Welcome! Visit a participating store to begin."],
+    character: "assets/customer.png"
   },
   {
     descTitle: "📸 Step 2: See a Sign at the Counter",
     descText: 'Customer sees a poster: "Earn Rewards! Scan to Join!" QR code at checkout.',
-    screenContent: "📸 See QR Code at Counter: 'Scan to Join Rewards!'"
+    screenMessages: ["📸 See QR Code at Counter: 'Scan to Join Rewards!'"],
+    character: "assets/customer.png"
   },
   {
     descTitle: "📲 Step 3: Scan the QR Code",
     descText: "Customer scans the QR code, WhatsApp chat with business opens automatically.",
-    screenContent: "📲 Opening WhatsApp chat... Connecting to Store..."
+    screenMessages: ["📲 Opening WhatsApp chat..."],
+    character: "assets/customer.png"
   },
   {
     descTitle: "💬 Step 4: Join via WhatsApp",
     descText: "Bot: 'Welcome to [Store Name] Rewards! 🚀 Send us a receipt photo to earn points.'",
-    screenContent: "💬 WhatsApp Message:\n\n'Welcome to Café Rewards! Send us your receipt to earn points.'"
+    screenMessages: [
+      "typing...",
+      "💬 Welcome to Café Rewards! 🚀 Send us your receipt to earn points."
+    ],
+    character: "assets/customer.png"
   },
   {
     descTitle: "📤 Step 5: Upload Receipt",
     descText: "Customer uploads photo of receipt (or enters receipt code).",
-    screenContent: "📤 You uploaded your receipt 📸\nSystem is checking..."
+    screenMessages: ["📤 You uploaded your receipt 📸", "System is checking..."],
+    character: "assets/customer.png"
   },
   {
     descTitle: "✅ Step 6: Earn Points",
     descText: "Customer gets confirmation: '✅ You've earned 50 points!'",
-    screenContent: "✅ Thanks! You earned 50 points!"
+    screenMessages: ["✅ Thanks! You earned 50 points!"],
+    character: "assets/customer.png"
   },
   {
     descTitle: "🎯 Step 7: Redeem Rewards",
     descText: "Customer types 'My Rewards' in WhatsApp, views balance and available offers.",
-    screenContent: "🎯 Your Rewards:\n- Free Coffee (100 points)\n- 10% Off Haircut (150 points)"
+    screenMessages: [
+      "🎯 Your Rewards:",
+      "- Free Coffee (100 points)",
+      "- 10% Off Haircut (150 points)"
+    ],
+    character: "assets/customer.png"
   },
 
   // STORE OWNER JOURNEY
   {
     descTitle: "🛠️ Store Owner: Step 1: Set Up",
     descText: "Owner signs up, gets unique QR code, access to dashboard, prints QR for store.",
-    screenContent: "🛠️ Owner Panel:\n- Download QR\n- Print Poster\n- Set Promotions"
+    screenMessages: ["🛠️ Owner Panel:\n- Download QR\n- Print Poster\n- Set Promotions"],
+    character: "assets/owner.png"
   },
   {
     descTitle: "📲 Store Owner: Step 2: Daily Ops",
     descText: "Customers scan QR and send receipts. Owner approves points via WhatsApp or dashboard.",
-    screenContent: "📲 Today's Activity:\n- 23 new receipts\n- 3 new members joined"
+    screenMessages: ["📲 Today's Activity:\n- 23 new receipts\n- 3 new members joined"],
+    character: "assets/owner.png"
   },
   {
     descTitle: "🎯 Store Owner: Step 3: Promotions",
     descText: "Owner sends offers like 'Double Points Friday' via WhatsApp to loyal customers.",
-    screenContent: "🎯 Promotion Set:\n- Double Points Friday!\n- AED 50 Spend = Free Drink ☕"
+    screenMessages: ["🎯 Promotion Set:\n- Double Points Friday!\n- AED 50 Spend = Free Drink ☕"],
+    character: "assets/owner.png"
   },
 
   // THE END
   {
     descTitle: "🔥 End of Journey",
     descText: "That's the full journey! Customer and Owner both benefit from a simple, rewarding system.",
-    screenContent: "🎉 Thanks for exploring the Loyalty Journey!"
+    screenMessages: ["🎉 Thanks for exploring the Loyalty Journey!"],
+    character: "assets/owner.png"
   }
 ];
 
+function typeMessage(messages, index = 0) {
+  const phone = document.getElementById('screenContent');
+  if (index >= messages.length) {
+    typing = false;
+    return;
+  }
+  phone.innerHTML += `<p><em>typing...</em></p>`;
+  setTimeout(() => {
+    phone.innerHTML = phone.innerHTML.replace(/<p><em>typing\.\.\.<\/em><\/p>/, `<p>${messages[index]}</p>`);
+    typeMessage(messages, index + 1);
+  }, 1500);
+}
+
 function nextStep() {
+  if (typing) return;
+  
   if (currentStep < steps.length) {
     const journey = document.getElementById('journeyDescription');
     const phone = document.getElementById('screenContent');
+    const character = document.getElementById('character');
 
     journey.innerHTML = `
       <h2>${steps[currentStep].descTitle}</h2>
       <p>${steps[currentStep].descText}</p>
     `;
-    phone.innerText = steps[currentStep].screenContent;
+    phone.innerHTML = ""; // Clear previous screen
+    character.style.backgroundImage = `url('${steps[currentStep].character}')`;
+    typing = true;
+    typeMessage(steps[currentStep].screenMessages);
     currentStep++;
   }
 }
