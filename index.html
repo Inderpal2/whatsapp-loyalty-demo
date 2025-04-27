@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loyalty Journey Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🧍 Loyalty Program Journey (Dubai)</h1>
+  
+  <div id="journey">
+
+    <div class="step active" id="step1">
+      <h2>🛒 Step 1: Visit the Store</h2>
+      <p>Customer visits a café, salon, gym, or shop offering the loyalty program.</p>
+    </div>
+
+    <div class="step" id="step2">
+      <h2>📸 Step 2: See a Sign at the Counter</h2>
+      <p>They see a poster: "Earn Rewards! Scan to Join!"</p>
+    </div>
+
+    <div class="step" id="step3">
+      <h2>📲 Step 3: Scan the QR Code</h2>
+      <p>Customer opens phone camera → scans QR → opens WhatsApp chat.</p>
+    </div>
+
+    <div class="step" id="step4">
+      <h2>💬 Step 4: Join the Program via WhatsApp</h2>
+      <p>WhatsApp bot welcomes them and asks to upload receipt photo or code.</p>
+    </div>
+
+    <div class="step" id="step5">
+      <h2>🎁 Step 5: Earn Points</h2>
+      <p>Receipt is verified, customer gets a WhatsApp message: "✅ You've earned 50 points!"</p>
+    </div>
+
+    <div class="step" id="step6">
+      <h2>🎯 Step 6: Redeem Points Later</h2>
+      <p>Customer types "My Rewards" in WhatsApp to see and redeem rewards.</p>
+    </div>
+
+    <hr>
+
+    <h1>🏪 Store Owner Journey</h1>
+
+    <div class="step" id="owner1">
+      <h2>🛠️ Step 1: Set Up</h2>
+      <p>Owner signs up, gets QR code, prints it, and displays it in-store.</p>
+    </div>
+
+    <div class="step" id="owner2">
+      <h2>📲 Step 2: Daily Operations</h2>
+      <p>Customers scan and submit receipts. Owner approves points via WhatsApp or mini-dashboard.</p>
+    </div>
+
+    <div class="step" id="owner3">
+      <h2>🎯 Step 3: Promotions and Offers</h2>
+      <p>Owner sends "Double Points Friday!" promos via WhatsApp to loyal customers.</p>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button onclick="prevStep()">⬅️ Back</button>
+    <button onclick="nextStep()">Next ➡️</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
