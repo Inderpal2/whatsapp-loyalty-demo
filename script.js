@@ -1,6 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
-  background: #f7f9fb;
+  background: #f0f4f8;
   margin: 0;
   padding: 20px;
   text-align: center;
@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
 }
 
@@ -16,33 +16,38 @@ h1 {
   margin-bottom: 20px;
 }
 
+.description {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 .phone-frame {
   width: 300px;
   height: 550px;
-  border: 16px solid #333;
+  border: 14px solid #333;
   border-radius: 36px;
   margin: 20px auto;
-  background: #fff;
+  background: #e5ddd5;
   position: relative;
   overflow: hidden;
-  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 .phone-screen {
   width: 100%;
   height: 100%;
-  background: #e5ddd5;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 20px;
   overflow-y: auto;
 }
 
 .screen-content {
   text-align: left;
-  width: 100%;
+  font-size: 16px;
 }
 
 .controls {
@@ -53,18 +58,13 @@ button {
   background-color: #00a884;
   color: white;
   border: none;
-  padding: 10px 16px;
+  padding: 12px 20px;
   margin: 5px;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
 }
 
-button:disabled {
-  background-color: grey;
-  cursor: not-allowed;
-}
-
-button:hover:not(:disabled) {
-  background-color: #00795e;
+button:hover {
+  background-color: #007c65;
 }
