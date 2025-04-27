@@ -3,27 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Loyalty Journey Demo</title>
+  <title>Loyalty Program Journey Demo</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="container">
-  <h1>🧍 Loyalty Program - Customer Journey</h1>
+  <h1>🌟 Loyalty Program Journey</h1>
+  <div id="journeyDescription" class="description">
+    <h2>🛒 Step 1: Visit the Store</h2>
+    <p>Customer visits a café, salon, gym, or retail shop that offers the loyalty program.</p>
+  </div>
 
   <div class="phone-frame">
-    <div class="phone-screen" id="phoneScreen">
+    <div id="phoneScreen" class="phone-screen">
       <div id="screenContent" class="screen-content">
-        <h2>🛒 Visit the Store</h2>
-        <p>Click "Scan QR" to begin your journey!</p>
+        <p>🏪 Welcome! Visit a participating store to begin.</p>
       </div>
     </div>
   </div>
 
   <div class="controls">
-    <button onclick="scanQR()">📸 Scan QR</button>
-    <button onclick="sendReceipt()" disabled id="receiptBtn">📤 Send Receipt</button>
-    <button onclick="viewRewards()" disabled id="rewardsBtn">🎁 View Rewards</button>
+    <button onclick="nextStep()">➡️ Next Step</button>
   </div>
 </div>
 
