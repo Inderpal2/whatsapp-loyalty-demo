@@ -1,25 +1,78 @@
-function scanQR() {
-  const screen = document.getElementById('screenContent');
-  screen.innerHTML = `
-    <h2>📲 WhatsApp Chat</h2>
-    <p><strong>Business:</strong> Welcome to Café Loyalty! 🚀<br>Send us your receipt to earn points.</p>
-  `;
-  document.getElementById('receiptBtn').disabled = false;
-}
+let currentStep = 0;
 
-function sendReceipt() {
-  const screen = document.getElementById('screenContent');
-  screen.innerHTML += `
-    <p><strong>You:</strong> (Uploads Receipt 📸)</p>
-    <p><strong>Business:</strong> ✅ Thanks! You've earned 50 points!</p>
-  `;
-  document.getElementById('rewardsBtn').disabled = false;
-}
+const steps = [
+  // CUSTOMER JOURNEY
+  {
+    descTitle: "🛒 Step 1: Visit the Store",
+    descText: "Customer visits a café, salon, gym, or shop offering the loyalty program.",
+    screenContent: "🏪 Welcome! Visit a participating store to begin."
+  },
+  {
+    descTitle: "📸 Step 2: See a Sign at the Counter",
+    descText: 'Customer sees a poster: "Earn Rewards! Scan to Join!" QR code at checkout.',
+    screenContent: "📸 See QR Code at Counter: 'Scan to Join Rewards!'"
+  },
+  {
+    descTitle: "📲 Step 3: Scan the QR Code",
+    descText: "Customer scans the QR code, WhatsApp chat with business opens automatically.",
+    screenContent: "📲 Opening WhatsApp chat... Connecting to Store..."
+  },
+  {
+    descTitle: "💬 Step 4: Join via WhatsApp",
+    descText: "Bot: 'Welcome to [Store Name] Rewards! 🚀 Send us a receipt photo to earn points.'",
+    screenContent: "💬 WhatsApp Message:\n\n'Welcome to Café Rewards! Send us your receipt to earn points.'"
+  },
+  {
+    descTitle: "📤 Step 5: Upload Receipt",
+    descText: "Customer uploads photo of receipt (or enters receipt code).",
+    screenContent: "📤 You uploaded your receipt 📸\nSystem is checking..."
+  },
+  {
+    descTitle: "✅ Step 6: Earn Points",
+    descText: "Customer gets confirmation: '✅ You've earned 50 points!'",
+    screenContent: "✅ Thanks! You earned 50 points!"
+  },
+  {
+    descTitle: "🎯 Step 7: Redeem Rewards",
+    descText: "Customer types 'My Rewards' in WhatsApp, views balance and available offers.",
+    screenContent: "🎯 Your Rewards:\n- Free Coffee (100 points)\n- 10% Off Haircut (150 points)"
+  },
 
-function viewRewards() {
-  const screen = document.getElementById('screenContent');
-  screen.innerHTML += `
-    <p><strong>You:</strong> My Rewards 🎁</p>
-    <p><strong>Business:</strong><br>⭐ Free Coffee - 100 Points<br>⭐ 10% Off Next Visit - 150 Points</p>
-  `;
+  // STORE OWNER JOURNEY
+  {
+    descTitle: "🛠️ Store Owner: Step 1: Set Up",
+    descText: "Owner signs up, gets unique QR code, access to dashboard, prints QR for store.",
+    screenContent: "🛠️ Owner Panel:\n- Download QR\n- Print Poster\n- Set Promotions"
+  },
+  {
+    descTitle: "📲 Store Owner: Step 2: Daily Ops",
+    descText: "Customers scan QR and send receipts. Owner approves points via WhatsApp or dashboard.",
+    screenContent: "📲 Today's Activity:\n- 23 new receipts\n- 3 new members joined"
+  },
+  {
+    descTitle: "🎯 Store Owner: Step 3: Promotions",
+    descText: "Owner sends offers like 'Double Points Friday' via WhatsApp to loyal customers.",
+    screenContent: "🎯 Promotion Set:\n- Double Points Friday!\n- AED 50 Spend = Free Drink ☕"
+  },
+
+  // THE END
+  {
+    descTitle: "🔥 End of Journey",
+    descText: "That's the full journey! Customer and Owner both benefit from a simple, rewarding system.",
+    screenContent: "🎉 Thanks for exploring the Loyalty Journey!"
+  }
+];
+
+function nextStep() {
+  if (currentStep < steps.length) {
+    const journey = document.getElementById('journeyDescription');
+    const phone = document.getElementById('screenContent');
+
+    journey.innerHTML = `
+      <h2>${steps[currentStep].descTitle}</h2>
+      <p>${steps[currentStep].descText}</p>
+    `;
+    phone.innerText = steps[currentStep].screenContent;
+    currentStep++;
+  }
 }
